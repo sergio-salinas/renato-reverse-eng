@@ -1,0 +1,44 @@
+# Answer for first one
+
+vals = [ 83, 75, 89, 45, 79, 82, 68, 83, 45, 55, 57, 50, 54 ]
+flag = ''.join([chr(v) for v in vals])
+print(flag)
+
+
+# Answer for second one
+Decompile
+./jd-cli HashCode.class -od output_jar/
+
+Print the required string by printing the str generated
+
+# Answer for the third one
+strings is just strings
+search for picoCTF
+
+# Just do it
+explain pwn checksec
+
+First go on ghidra and learn that you can input P@SSW0RD
+python -c 'print("P@SSWORD" + "\x00")' > input
+./just_do_it < input
+
+No flag
+
+Check in ghidra how flag is printed
+get flag address and find a way to print it
+since we have address, and we can overwrite output_message, use buffer overflow to replace with address
+0x28 - 0x14 means we require 20 null bytes
+and then we append address
+Remember little endian
+0804 A080 = > 08A0 0408
+
+
+set disassembly-flavor intel
+
+you can sometimes circumvent stuff with dynamic analysis, such as using GDB
+pwn 1 has a lengthy process with overflow
+but we can just run it and right on the comparison
+
+set $eflags = $eflags | 0x40
+to set ZF flag on and not jump
+printing out the flag
